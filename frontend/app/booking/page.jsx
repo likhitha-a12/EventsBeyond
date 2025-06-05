@@ -63,31 +63,30 @@ export default function BookingForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    const response = await fetch("http://localhost:8000/api/bookings/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await fetch("http://localhost:8000/api/bookings/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    if (response.ok) {
-      toast.success("Booking Successful!");
-      console.log("Submitted Data:", formData);
-      setTimeout(() => router.push("/thankyou"), 2000); // Optional
-    } else {
-      toast.error("Booking failed. Please try again.");
+      if (response.ok) {
+        toast.success("Booking Successful!");
+        console.log("Submitted Data:", formData);
+        setTimeout(() => router.push("/thankyou"), 2000);
+      } else {
+        toast.error("Booking failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+      toast.error("Something went wrong!");
     }
-  } catch (error) {
-    console.error("Error submitting booking:", error);
-    toast.error("Something went wrong!");
-  }
-};
-
+  };
 
   const handlePayment = (method) => {
     setFormData((prev) => ({ ...prev, payment_method: method }));
@@ -115,7 +114,7 @@ export default function BookingForm() {
                 name={field}
                 value={formData[field]}
                 onChange={handleChange}
-                className="form-control w-full p-2 border rounded"
+                className="form-control w-full p-2 border rounded text-black"
               />
             </div>
           ))}
@@ -127,7 +126,7 @@ export default function BookingForm() {
               name="event_name"
               value={formData.event_name}
               onChange={handleChange}
-              className="form-control w-full p-2 border rounded"
+              className="form-control w-full p-2 border rounded text-black"
             >
               <option value="wedding">Wedding</option>
               <option value="birthday">Birthday</option>
@@ -143,7 +142,7 @@ export default function BookingForm() {
               name="ticket_type"
               value={formData.ticket_type}
               onChange={handleChange}
-              className="form-control w-full p-2 border rounded"
+              className="form-control w-full p-2 border rounded text-black"
             >
               <option value="basic">Basic - ₹30000</option>
               <option value="premium">Premium - ₹50000</option>
@@ -159,7 +158,7 @@ export default function BookingForm() {
               value={formData.ticket_quantity}
               onChange={handleChange}
               min="0"
-              className="form-control w-full p-2 border rounded"
+              className="form-control w-full p-2 border rounded text-black"
             />
           </div>
 
@@ -170,7 +169,7 @@ export default function BookingForm() {
               name="ticket_price"
               value={formData.ticket_price}
               readOnly
-              className="form-control w-full p-2 border rounded bg-gray-100"
+              className="form-control w-full p-2 border rounded bg-gray-100 text-black"
             />
           </div>
 
@@ -181,7 +180,7 @@ export default function BookingForm() {
               name="total_price"
               value={formData.total_price}
               readOnly
-              className="form-control w-full p-2 border rounded bg-gray-100"
+              className="form-control w-full p-2 border rounded bg-gray-100 text-black"
             />
           </div>
 
@@ -193,7 +192,7 @@ export default function BookingForm() {
               name="promo_code"
               value={formData.promo_code}
               onChange={handleChange}
-              className="form-control w-full p-2 border rounded"
+              className="form-control w-full p-2 border rounded text-black"
             />
           </div>
 
